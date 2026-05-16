@@ -1,0 +1,6 @@
+reports/*
+!reports/.gitkeep
+.env
+node_modules/
+*.html
+*.json.bak

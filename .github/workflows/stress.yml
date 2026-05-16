@@ -1,0 +1,43 @@
+name: Stress Test (Scheduled)
+
+on:
+  schedule:
+    - cron: '0 2 * * 1'  # Every Monday at 2am UTC
+  workflow_dispatch:
+
+jobs:
+  stress-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install k6
+        run: |
+          sudo gpg --no-default-keyring \
+            --keyring /usr/share/keyrings/k6-archive-keyring.gpg \
+            --keyserver hkp://keyserver.ubuntu.com:80 \
+            --recv-keys C5AD17C747E3415A3642D57D77C6C491D6AC1D69
+          echo "deb [signed-by=/usr/share/keyrings/k6-archive-keyring.gpg] \
+            https://dl.k6.io/deb stable main" | \
+            sudo tee /etc/apt/sources.list.d/k6.list
+          sudo apt-get update && sudo apt-get install k6
+
+      - name: Run stress test
+        env:
+          CONFIG_FILE: staging
+          STAGING_BASE_URL: ${{ secrets.STAGING_BASE_URL }}
+          STAGING_ADMIN_USER: ${{ secrets.STAGING_ADMIN_USER }}
+          STAGING_ADMIN_PASS: ${{ secrets.STAGING_ADMIN_PASS }}
+          STAGING_CLICKPOST_API_KEY: ${{ secrets.STAGING_CLICKPOST_API_KEY }}
+          STAGING_CLICKPOST_USERNAME: ${{ secrets.STAGING_CLICKPOST_USERNAME }}
+          STAGING_CLICKPOST_PASS: ${{ secrets.STAGING_CLICKPOST_PASS }}
+          STAGING_X_API_KEY: ${{ secrets.STAGING_X_API_KEY }}
+        run: k6 run tests/stress/stress.test.js
+
+      - name: Upload results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: stress-results
+          path: reports/
+          retention-days: 30

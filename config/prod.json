@@ -1,0 +1,15 @@
+{
+  "baseUrl": "https://backend.zippee.delivery",
+  "clickpostBaseUrl": "https://zorms.zippee.delivery",
+  "vus": {
+    "smoke": 1,
+    "load": 50,
+    "stress": 200,
+    "soak": 50
+  },
+  "thresholds": {
+    "p95": 500,
+    "p99": 1000,
+    "errorRate": 0.01
+  }
+}

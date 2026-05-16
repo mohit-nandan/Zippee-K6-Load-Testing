@@ -1,0 +1,15 @@
+{
+  "baseUrl": "https://preprod.api.zfwhospitality.in",
+  "clickpostBaseUrl": "https://preprod.zorms.zfwhospitality.in",
+  "vus": {
+    "smoke": 1,
+    "load": 25,
+    "stress": 100,
+    "soak": 20
+  },
+  "thresholds": {
+    "p95": 800,
+    "p99": 1500,
+    "errorRate": 0.02
+  }
+}
