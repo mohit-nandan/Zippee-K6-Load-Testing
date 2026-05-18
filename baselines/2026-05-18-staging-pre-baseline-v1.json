@@ -1,0 +1,16 @@
+{
+  "date": "2026-05-18T10:02:21.221Z",
+  "environment": "staging",
+  "deploy": "pre-baseline-v1",
+  "vus": 5,
+  "results": {
+    "http_req_duration_p95_ms": 3107,
+    "http_req_duration_p99_ms": 0,
+    "http_req_duration_avg_ms": 1622,
+    "error_rate_percent": 0,
+    "rps": 1.53,
+    "total_requests": 828,
+    "checks_pass_rate": 100
+  },
+  "thresholds_passed": true
+}

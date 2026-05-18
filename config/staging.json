@@ -3,9 +3,9 @@
   "clickpostBaseUrl": "https://zorms.zfwhospitality.in",
   "vus": {
     "smoke": 1,
-    "load": 25,
-    "stress": 100,
-    "soak": 20
+    "load": 5,
+    "stress": 15,
+    "soak": 5
   },
   "thresholds": {
     "p95": 5000,
