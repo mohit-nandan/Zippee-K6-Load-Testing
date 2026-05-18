@@ -7,7 +7,7 @@
 #   .\run.ps1 load prod
 
 param(
-    [Parameter(Mandatory)][ValidateSet('smoke','load','stress','soak','baseline')][string]$Test,
+    [Parameter(Mandatory)][ValidateSet('smoke','load','stress','soak','baseline','spike')][string]$Test,
     [ValidateSet('staging','preprod','prod')][string]$Env = 'staging',
     [string]$Deploy = 'unknown'
 )
@@ -24,6 +24,7 @@ $testFile = switch ($Test) {
     'stress'   { 'tests/stress/stress.test.js' }
     'soak'     { 'tests/soak/soak.test.js' }
     'baseline' { 'tests/baseline/baseline.test.js' }
+    'spike'    { 'tests/spike/spike.test.js' }
 }
 
 Write-Host "Running $Test test against $Env..." -ForegroundColor Cyan
